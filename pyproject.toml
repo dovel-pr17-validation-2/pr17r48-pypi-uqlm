@@ -1,0 +1,163 @@
+[project]
+name = "uqlm"
+version = "0.6.8"
+description = "UQLM (Uncertainty Quantification for Language Models) is a Python package for UQ-based LLM hallucination detection."
+readme = "assets/README_PYPI.md"
+license = "Apache-2.0"
+requires-python = ">=3.10, <4.0"
+authors = [
+    { name = "Dylan Bouchard", email = "dylan.bouchard@cvshealth.com" },
+    { name = "Mohit Singh Chauhan", email = "mohitsingh.chauhan@cvshealth.com" },
+]
+maintainers = [
+    { name = "Dylan Bouchard", email = "dbouchard92@gmail.com" },
+    { name = "Mohit Singh Chauhan", email = "mohitcek@gmail.com" },
+    { name = "David Skarbrevik", email = "skarbrevik@gmail.com" },
+    { name = "Ho-Kyeong Ra", email = "doyajii1@gmail.com" },
+    { name = "Viren Bajaj", email = "virenbajaj4@gmail.com" },
+    { name = "Zeya Ahmad", email = "zeyahmd@gmail.com" },
+    { name = "Vipin Gyanchandani", email = "vipingyanchandani@gmail.com" },
+    { name = "Aaron Lohner", email = "aaron.lohner@gmail.com" },
+    { name = "Kaushik Tummalapalli", email = "kaushiktummalapalli55@gmail.com" },
+]
+keywords = ["LLM", "large language model", "LLM evaluation", "hallucination", "uncertainty quantification"]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "langchain>=0.3.7",
+    "langchain-model-profiles>=0.0.3",
+    "torch>=2.6.0",
+    "transformers>=4.45.2,<5.0.0",
+    "scikit-learn>=1.5.2,<2.0.0; python_version < '3.13'",
+    "scikit-learn>=1.7.0,<2.0.0; python_version >= '3.13'",
+    "numpy>=1.26.4,<2.0.0; python_version < '3.13'",
+    "numpy>=2.3.1; python_version >= '3.13'",
+    "scipy>=1.15.0,<2.0.0; python_version >= '3.13'",
+    "matplotlib>=3.10.0,<4.0.0",
+    "optuna>=4.0.0,<5.0.0",
+    "bert-score>=0.3.0,<0.4.0",
+    "pandas>=2.3.0,<3.0.0",
+    "sentence-transformers>=3.4,<6.0",
+    "datasets>=3.3.2,<5.0.0",
+    "pyarrow<26; python_version < '3.13'",
+    "rich>=13.8.0,<15.0.0",
+    "ipywidgets>=8.1.7,<9.0.0",
+]
+
+[project.urls]
+repository = "https://github.com/cvs-health/uqlm"
+homepage = "https://github.com/cvs-health/uqlm"
+documentation = "https://cvs-health.github.io/uqlm/latest/index.html"
+
+[project.optional-dependencies]
+accelerate = ["accelerate>=0.26.0"]
+
+[dependency-groups]
+dev = [
+    "python-dotenv>=1.2.0,<2.0.0",
+    "ruff==0.9.7",
+    "pre-commit>=4.1.0,<5.0.0",
+    "ipykernel>=6.29.5,<8.0.0",
+    "langchain-openai>=0.2.6",
+    "langchain-google-vertexai>=2.0.8",
+]
+docs = [
+    "sphinx==8.1.3",
+    "pydata_sphinx_theme==0.19.0",
+    "sphinxcontrib-bibtex==2.7.0",
+    "sphinx-autodoc-typehints==2.3.0",
+    "sphinx-gallery==0.22.1",
+    "sphinx-favicon==1.1.0",
+    "nbsphinx==0.9.8",
+    "sphinx-design==0.6.1",
+    "sphinx-github-changelog==1.7.2",
+]
+test = [
+    "ipykernel>=6.29.5,<8.0.0",
+    "langchain-openai>=0.2.6",
+    "pytest>=8.3.5,<10.0.0",
+    "langchain-google-vertexai>=2.0.8",
+    "pytest-asyncio>=0.25.3,<1.5.0",
+    "pytest-cov>=6,<8",
+    "pytest-rerunfailures>=16.0,<17.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["uqlm"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "asyncio",
+    "integration: tests exercising subprocesses or external services; retried on failure in CI"
+]
+filterwarnings = [
+    "error:coroutine .* was never awaited:RuntimeWarning",
+    "error::pytest.PytestUnraisableExceptionWarning"
+]
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+# Core settings
+line-length = 400
+
+[tool.ruff.lint]
+#What rules to enable
+select = ["E", "F"]
+# E = pycodestyle errors
+# F = pyflakes
+# I = isort (import sorting)
+# B = bugbear (best practices)
+# UP = pyupgrade (modernization)
+# D = pydocstyle (docstring rules)
+# S = bandit (security)
+
+#What rules to ignore
+ignore = []
+
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = true
+line-ending = "lf"
+docstring-code-format = true
+
+[tool.ruff.lint.per-file-ignores]
+"uqlm/utils/prompts/*.py" = ["ALL"]
